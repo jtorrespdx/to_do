@@ -30,10 +30,12 @@
         function testGetDescription()
         {
             //Arrange
+            //Make a description and then store it in a new object
             $description = "Do Dishes";
             $test_task = new Task($description);
 
             //Act
+            //See if getDescription is functional
             $result = $test_task->getDescription();
 
             //Assert
