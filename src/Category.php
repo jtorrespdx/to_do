@@ -31,6 +31,16 @@
         }
 
         //Save function
+        function save()
+        {
+            //Call upon DB PDO to store the name of the category where this current objects id is located
+            $GLOBALS['DB']->exec("UPDATE categories SET name = '{$new_name}' WHERE id = {$this->getId()};");
+
+            //Set current session name to updated name
+            $this->setName($new_name);
+        }
+
+        //Update function
         
 
     }
