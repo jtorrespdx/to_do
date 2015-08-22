@@ -26,6 +26,18 @@
             Category::deleteAll();
         }
 
-        
+        //Test our get description
+        function testGetDescription()
+        {
+            //Arrange
+            $description = "Do Dishes";
+            $test_task = new Task($description);
+
+            //Act
+            $result = $test_task->getDescription();
+
+            //Assert
+            $this->assertEquals($description, $result);
+        }
     }
 ?>
