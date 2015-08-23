@@ -52,13 +52,6 @@
             $this->setName($new_name);
         }
 
-        //Delete function
-        function delete()
-        {
-            //Call upon DB PDO to execute a MySQL command that deletes the column from categories where this id resides.
-            $GLOBALS['DB']->exec("DELETE FROM categories WHERE id = {$this->getId()};");
-        }
-
         //Static function getAll
         static function getAll()
         {
@@ -150,6 +143,14 @@
             return $tasks;
 
         }
+
+        function delete()
+        {
+            //Now includes many-to-many support by deleting from the database this category and deleting every row in the database associated with it.
+            $GLOBALS['DB']->exec("DELETE FROM categories WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM categories_tasks WHERE category_id = {$this->getId()};");
+        }
+
 
     }
 

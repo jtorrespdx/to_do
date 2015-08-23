@@ -101,13 +101,6 @@
             $this->setDescription($new_description);
         }
 
-        //Delete single task
-        function delete()
-        {
-            //Delete this current instance of task by location of id in DB
-            $GLOBALS['DB']->exec("DELETE FROM tasks WHERE id = {$this->getId()}");
-        }
-
         function addCategory($category)
         {
             //Takes the category object argument and places its ID in the join table attached to this tasks id. i.e (This instance object of task if we want to add a category to it will be bound by their Id's in the join table.)
@@ -149,6 +142,13 @@
             }
             //We then return all categories associated with this task.
             return $categories;
+        }
+
+        function delete()
+        {
+            //Now includes many-to-many support by deleting from the database this task and deleting every row in the database associated with it.
+            $GLOBALS['DB']->exec("DELETE FROM tasks WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM categories_tasks WHERE task_id = {$this->getId()};");
         }
     }
 ?>
