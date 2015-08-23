@@ -105,6 +105,13 @@
             }
             return $found_category;
         }
+
+        //Task Method
+        function addTask()
+        {
+            //Calld upon the DB PDO to execute a command to place this current ID and a tasks ID to the join table. This will associate them together.
+            $GLOBALS['DB']->exec("INSERT INTO categories_tasks (category_id, task_id) VALUES ({$this->getId()}, {$task->getId()});");
+        }
     }
 
 ?>
