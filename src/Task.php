@@ -144,7 +144,7 @@
                 $id = $returned_category[0]['id'];
                 $new_category = new Category($name, $id);
 
-                //At the end of this loop cycle we push our new category object into the the categories array. and then continuen the foreach loop over again.
+                //At the end of this loop cycle we push our new category object into the the categories array. and then continue the foreach loop over again.
                 array_push($categories, $new_category);
             }
             //We then return all categories associated with this task.
