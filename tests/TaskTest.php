@@ -17,7 +17,7 @@
     $DB = new PDO($server, $username, $password);
 
     //Our testing class using phpunit
-    class TaskTest extends PHUnit_Framework_TestCase
+    class TaskTest extends PHPUnit_Framework_TestCase
     {
         //Our teardown so we start with a fresh DB everytime we test.
         protected function tearDown()
