@@ -34,7 +34,7 @@
         function save()
         {
             //Call upon PDO to insert the task description into our DB
-            $GLOBALS['DB']->exec("INSERT INTO tasks (description) Values ('{$this->getDescription()} ');");
+            $GLOBALS['DB']->exec("INSERT INTO tasks (description) Values ('{$this->getDescription()}');");
 
             //Lets our app store ID as a genrated ID from MySQL
             $this->id = $GLOBALS['DB']->lastInsertId();
