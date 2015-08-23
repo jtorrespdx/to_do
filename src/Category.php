@@ -106,12 +106,51 @@
             return $found_category;
         }
 
-        //Task Method
-        function addTask()
+        //addTask Method
+        function addTask($task)
         {
             //Calld upon the DB PDO to execute a command to place this current ID and a tasks ID to the join table. This will associate them together.
             $GLOBALS['DB']->exec("INSERT INTO categories_tasks (category_id, task_id) VALUES ({$this->getId()}, {$task->getId()});");
         }
+
+        function getTasks()
+        {
+            //We make a query that pulls from the join table the task ids that are connected to this category ID
+            $query = $GLOBALS['DB']->query("SELECT task_id FROM categories_tasks WHERE category_id = {$this->getId()};");
+
+            //We then turn them into a PDO object that we then parse out all of the task id's using the fetchAll method.
+            $task_ids = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            //Create an array to hold all of the new task objects
+            $tasks = array();
+
+            //Make a foreach loop to cylce through each task id from our join table. (This foreach loop is cycling a nested array) *fetchAll returns a nested array*
+            foreach($task_ids as $id)
+            {
+                //Extract the current id from the join table data (Wich is a an array) and place it in variable
+                $task_id = $id['task_id'];
+
+                //Call the DB PDO to query and extract all the tasks with the same ID as that of the join table.
+                $result = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE id = {$task_id};");
+
+                //Extract all results as a nested array (fetchAll results are always nested arrays)
+                $returned_task = $result->fetchAll(PDO::FETCH_ASSOC);
+
+                //Since returned task is a nested array we go to the first array and grab the data in the key description. and store that description in a variable.
+                $description = $returned_task[0]['description'];
+
+                //Same thing as before but with the id
+                $id = $returned_task[0]['id'];
+
+                //We then make objects out of them shove those objects in an array and send them out.
+                $new_task = new Task($description, $id);
+                array_push($tasks, $new_task);
+            }
+
+            return $tasks;
+
+        }
+
     }
 
 ?>
