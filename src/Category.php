@@ -52,6 +52,31 @@
             $this->setName($new_name);
         }
 
+        //Delete function
+        function delete()
+        {
+            //Call upon DB PDO to execute a MySQL command that deletes the column from categories where this id resides.
+            $GLOBALS['DB']->exec("DELETE FROM categories WHERE id = {$this->getId()};");
+        }
+
+        //Static function getAll
+        static function getAll()
+        {
+            //Query the DB to grab all categories and store them in an array.
+            $returned_categories = $GLOBALS['DB']->query("SELECT * FROM categories;");
+
+            //Run through the DB query and form each row into a category object.
+            $categories = array();
+            foreach ($returned_categories as $category)
+            {
+                $name = $category['name'];
+                $id = $category['id'];
+                $new_category = new Category($name, $id);
+                array_push($categories, $new_category);
+            }
+            //Send out the packedged MySQL query for PHP to manipulate
+            return $categories;
+        }
     }
 
 ?>
