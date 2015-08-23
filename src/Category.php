@@ -77,6 +77,15 @@
             //Send out the packedged MySQL query for PHP to manipulate
             return $categories;
         }
+
+        //DeleteAll function
+        static function deleteAll()
+        {
+            //Call upon DB PDO to execute MySQL command to wipe everything from categories
+            $GLOBALS['DB']->exec("DELETE FROM categories;");
+        }
+
+        
     }
 
 ?>
