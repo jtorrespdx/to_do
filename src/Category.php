@@ -85,7 +85,26 @@
             $GLOBALS['DB']->exec("DELETE FROM categories;");
         }
 
-        
+        //Fin function
+        static function find($search_id)
+        {
+            //Set a null variable for found category before functions process.
+            $found_category = null;
+
+            //Use getAll function to query and store data for php to process
+            $categories = Category::getAll();
+
+            //go through categories and extract the one with the id we are searching for.
+            foreach($categories as $category)
+            {
+                $category_id = $category->getId();
+                if($category_id == $search_id)
+                {
+                    $found_category = $category;
+                }
+            }
+            return $found_category;
+        }
     }
 
 ?>
