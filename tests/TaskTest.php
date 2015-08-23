@@ -41,5 +41,20 @@
             //Assert
             $this->assertEquals($description, $result);
         }
+
+        function testSetDescription()
+        {
+            //Arrange
+            $description = "Do Dishes";
+            $test_task = new Task($description);
+
+            //Act
+            //Set the task to a new task to see if the task has changed
+            $test_task->setDescription("Drink coffee");
+            $result = $test_task->getDescription();
+
+            //Assert
+            $this->assertEquals("Drink coffee", $result);
+        }
     }
 ?>
