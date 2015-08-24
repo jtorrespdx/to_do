@@ -9,7 +9,7 @@
         <p>Here are all your tasks:</p>
         <ul>
             {% for task in tasks %}
-                <li><a href="/tasks/{{ task.getId }}">{{ task.getDescription }}</a></li>
+                <li><a href="/tasks/{{ task.getId }}">{{ task.getDescription }} {{ task.getDueDate}}</a></li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -17,6 +17,7 @@
     <form action='/tasks' method='post'>
         <label for='description'>Task description:</label>
         <input id='description' name='description' type='text'>
+
 
         <button type='submit'>Add task</button>
     </form>

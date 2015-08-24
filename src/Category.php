@@ -135,8 +135,11 @@
                 //Same thing as before but with the id
                 $id = $returned_task[0]['id'];
 
+                $completed = $returned_task[0]['completed'];
+
+                $due_date = $returned_task[0]['due_date'];
                 //We then make objects out of them shove those objects in an array and send them out.
-                $new_task = new Task($description, $id);
+                $new_task = new Task($description, $id, $completed, $due_date);
                 array_push($tasks, $new_task);
             }
 

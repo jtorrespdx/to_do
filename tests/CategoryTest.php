@@ -8,7 +8,7 @@
     require_once "src/Category.php";
     require_once "src/Task.php";
 
-    $server = 'mysql:host=localhost:8889;dbname=to_do_test';
+    $server = 'mysql:host=localhost;dbname=to_do_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
@@ -190,7 +190,9 @@
             //Makes new Task object and saves it
             $description = "File reports";
             $id2 = 2;
-            $test_task = new Task($description, $id2);
+            $completed = 0;
+            $due_date = null;
+            $test_task = new Task($description, $id2, $completed, $due_date);
             $test_task->save();
 
             //Act
@@ -211,12 +213,16 @@
 
             $description = "Wash the dog";
             $id2 = 2;
-            $test_task = new Task($description, $id2);
+            $completed = 0;
+            $due_date = null;
+            $test_task = new Task($description, $id2, $completed, $due_date);
             $test_task->save();
 
             $description2 = "Take out the trash";
             $id3 = 3;
-            $test_task2 = new Task($description2, $id3);
+            $completed = 0;
+            $due_date = null;
+            $test_task2 = new Task($description2, $id3, $completed, $due_date);
             $test_task2->save();
 
             //Act
@@ -237,7 +243,9 @@
 
             $description = "File reports";
             $id2 = 2;
-            $test_task = new Task($description, $id2);
+            $completed = 0;
+            $due_date = null;
+            $test_task = new Task($description, $id2, $completed, $due_date);
             $test_task->save();
 
             //Act

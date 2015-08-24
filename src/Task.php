@@ -5,12 +5,16 @@
         //Properties
         private $description;
         private $id;
+        private $completed;
+        private $due_date;
 
         //Constructor
-        function __construct($description, $id = null)
+        function __construct($description, $id = null, $completed, $due_date)
         {
             $this->description = $description;
             $this->id = $id;
+            $this->completed = $completed;
+            $this->due_date = $due_date;
         }
 
         //Description getter and setter
@@ -28,6 +32,26 @@
         function getId()
         {
             return $this->id;
+        }
+
+        function getCompleted()
+        {
+            return $this->completed;
+        }
+
+        function setCompleted($new_completed)
+        {
+            $this->completed = $new_completed;
+        }
+
+        function getDueDate()
+        {
+            return $this->due_date;
+        }
+
+        function setDueDate($new_due_date)
+        {
+            $this->due_date = $new_due_date;
         }
 
         //Save function
@@ -52,7 +76,9 @@
             {
                 $description = $task['description'];
                 $id = $task['id'];
-                $new_task = new TASK($description, $id);
+                $completed = $task['completed'];
+                $due_date = $task['due_date'];
+                $new_task = new TASK($description, $id, $completed, $due_date);
                 array_push($tasks, $new_task);
             }
 
@@ -101,9 +127,15 @@
             $this->setDescription($new_description);
         }
 
+        function completed($new_completed)
+        {
+            $GLOBALS['DB']->exec("UPDATE tasks SET completed = 1 WHERE id = {$this->getId()};");
+            $this->setCompleted(1);
+        }
+
         function addCategory($category)
         {
-            //Takes the category object argument and places its ID in the join table attached to this tasks id. i.e (This instance object of task if we want to add a category to it will be bound by their Id's in the join table.)
+            //Takes the category object argument and places its ID in the join          table attached to this tasks id. i.e (This instance object of task if we want to add a category to it will be bound by their Id's in the join table.)
             $GLOBALS['DB']->exec("INSERT INTO categories_tasks (category_id, task_id) VALUES ({$category->getId()}, {$this->getId()});");
         }
 
